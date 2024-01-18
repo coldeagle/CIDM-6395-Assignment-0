@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+{% block title %}Select Date and Time{% endblock title %}
+{% block content %}
+
+    <h2>Choose a Date and Timeframe</h2>
+    <hr/>
+    <div class="row pb-2">
+        <div class="col">
+        <!--<div class="accordion" id="dates_available">-->
+            The date you selected, {{response_json.requestedDay}}, is
+                {% if response_json.available %}available! We have included it and some alternative dates!
+                {% else %}
+                    not available. Please select from the following alternative dates:
+                {% endif %}
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col">
+            {% for availDay in response_json.availableDates %}
+            <details class="p-1">
+                <summary>{{ availDay.day}}</summary>
+                <div class="row pb-1">
+                    <div class="col-12">
+                        <ul>
+                            {% for availTime in availDay.availableTimes %}
+
+                            <li><a href="{% url 'book_date' %}?scheduledDate={{availDay.day}}&startTime={{availTime.startTime}}&endTime={{availTime.endTime}}">Starting at: {{ availTime.startTime }} and Ending at: {{ availTime.endTime }}*</a></li>
+
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </details>
+            {% endfor %}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col">
+            * Please note, the following times are in PST
+        </div>
+    </div>
+{% endblock content %}

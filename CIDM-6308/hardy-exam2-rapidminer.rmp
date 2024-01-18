@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="9.10.013">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="9.10.013" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="read_csv" compatibility="9.10.013" expanded="true" height="68" name="Read CSV" width="90" x="45" y="34">
+        <parameter key="csv_file" value="D:\Personal OneDrive\OneDrive\Documents\School\2022\CIDM-6308\Training.csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="true"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="starting_row" value="1"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="infinity_representation" value=""/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="true"/>
+        <list key="annotations"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="windows-1252"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="CustomerID.false.polynominal.attribute"/>
+          <parameter key="1" value="Gender.true.binominal.attribute"/>
+          <parameter key="2" value="SeniorCitizen.true.binominal.attribute"/>
+          <parameter key="3" value="Partner.true.binominal.attribute"/>
+          <parameter key="4" value="Dependents.true.binominal.attribute"/>
+          <parameter key="5" value="Tenure.true.integer.attribute"/>
+          <parameter key="6" value="PhoneService.true.binominal.attribute"/>
+          <parameter key="7" value="InternetService.true.polynominal.attribute"/>
+          <parameter key="8" value="Contract.true.polynominal.attribute"/>
+          <parameter key="9" value="PaperlessBilling.true.binominal.attribute"/>
+          <parameter key="10" value="PaymentMethod.true.polynominal.attribute"/>
+          <parameter key="11" value="MonthlyCharges.true.real.attribute"/>
+          <parameter key="12" value="TotalCharges.true.real.attribute"/>
+          <parameter key="13" value="Churn.true.binominal.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="false"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="9.10.013" expanded="true" height="82" name="Set Role" width="90" x="179" y="34">
+        <parameter key="attribute_name" value="Churn"/>
+        <parameter key="target_role" value="label"/>
+        <list key="set_additional_roles"/>
+      </operator>
+      <operator activated="true" class="read_csv" compatibility="9.10.013" expanded="true" height="68" name="Read CSV (2)" width="90" x="45" y="391">
+        <parameter key="csv_file" value="D:\Personal OneDrive\OneDrive\Documents\School\2022\CIDM-6308\Prediction.csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="true"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="starting_row" value="1"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="infinity_representation" value=""/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="true"/>
+        <list key="annotations"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="windows-1252"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="CustomerID.false.polynominal.attribute"/>
+          <parameter key="1" value="Gender.true.binominal.attribute"/>
+          <parameter key="2" value="SeniorCitizen.true.binominal.attribute"/>
+          <parameter key="3" value="Partner.true.binominal.attribute"/>
+          <parameter key="4" value="Dependents.true.binominal.attribute"/>
+          <parameter key="5" value="Tenure.true.integer.attribute"/>
+          <parameter key="6" value="PhoneService.true.binominal.attribute"/>
+          <parameter key="7" value="InternetService.true.polynominal.attribute"/>
+          <parameter key="8" value="Contract.true.polynominal.attribute"/>
+          <parameter key="9" value="PaperlessBilling.true.binominal.attribute"/>
+          <parameter key="10" value="PaymentMethod.true.polynominal.attribute"/>
+          <parameter key="11" value="MonthlyCharges.true.real.attribute"/>
+          <parameter key="12" value="TotalCharges.true.real.attribute"/>
+          <parameter key="13" value="Churn.true.binominal.prediction"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="false"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="9.10.013" expanded="true" height="82" name="Set Role (2)" width="90" x="179" y="391">
+        <parameter key="attribute_name" value="Churn"/>
+        <parameter key="target_role" value="prediction"/>
+        <list key="set_additional_roles"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="9.10.013" expanded="true" height="103" name="Multiply" width="90" x="313" y="34"/>
+      <operator activated="true" class="h2o:logistic_regression" compatibility="9.10.001" expanded="true" height="124" name="Logistic Regression" width="90" x="447" y="187">
+        <parameter key="solver" value="AUTO"/>
+        <parameter key="reproducible" value="false"/>
+        <parameter key="maximum_number_of_threads" value="4"/>
+        <parameter key="use_regularization" value="false"/>
+        <parameter key="lambda_search" value="false"/>
+        <parameter key="number_of_lambdas" value="0"/>
+        <parameter key="lambda_min_ratio" value="0.0"/>
+        <parameter key="early_stopping" value="true"/>
+        <parameter key="stopping_rounds" value="3"/>
+        <parameter key="stopping_tolerance" value="0.001"/>
+        <parameter key="standardize" value="true"/>
+        <parameter key="non-negative_coefficients" value="false"/>
+        <parameter key="add_intercept" value="true"/>
+        <parameter key="compute_p-values" value="true"/>
+        <parameter key="remove_collinear_columns" value="true"/>
+        <parameter key="missing_values_handling" value="MeanImputation"/>
+        <parameter key="max_iterations" value="0"/>
+        <parameter key="max_runtime_seconds" value="0"/>
+      </operator>
+      <operator activated="true" class="concurrency:parallel_decision_tree" compatibility="9.10.013" expanded="true" height="103" name="Decision Tree" width="90" x="447" y="34">
+        <parameter key="criterion" value="gain_ratio"/>
+        <parameter key="maximal_depth" value="10"/>
+        <parameter key="apply_pruning" value="true"/>
+        <parameter key="confidence" value="0.1"/>
+        <parameter key="apply_prepruning" value="true"/>
+        <parameter key="minimal_gain" value="0.015"/>
+        <parameter key="minimal_leaf_size" value="30"/>
+        <parameter key="minimal_size_for_split" value="60"/>
+        <parameter key="number_of_prepruning_alternatives" value="3"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="9.10.013" expanded="true" height="103" name="Multiply (2)" width="90" x="447" y="391"/>
+      <operator activated="true" class="apply_model" compatibility="9.10.013" expanded="true" height="82" name="LR" width="90" x="648" y="187">
+        <list key="application_parameters"/>
+        <parameter key="create_view" value="false"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="9.10.013" expanded="true" height="82" name="DT" width="90" x="648" y="34">
+        <list key="application_parameters"/>
+        <parameter key="create_view" value="false"/>
+      </operator>
+      <connect from_op="Read CSV" from_port="output" to_op="Set Role" to_port="example set input"/>
+      <connect from_op="Set Role" from_port="example set output" to_op="Multiply" to_port="input"/>
+      <connect from_op="Read CSV (2)" from_port="output" to_op="Set Role (2)" to_port="example set input"/>
+      <connect from_op="Set Role (2)" from_port="example set output" to_op="Multiply (2)" to_port="input"/>
+      <connect from_op="Multiply" from_port="output 1" to_op="Decision Tree" to_port="training set"/>
+      <connect from_op="Multiply" from_port="output 2" to_op="Logistic Regression" to_port="training set"/>
+      <connect from_op="Logistic Regression" from_port="model" to_op="LR" to_port="model"/>
+      <connect from_op="Decision Tree" from_port="model" to_op="DT" to_port="model"/>
+      <connect from_op="Multiply (2)" from_port="output 1" to_op="LR" to_port="unlabelled data"/>
+      <connect from_op="Multiply (2)" from_port="output 2" to_op="DT" to_port="unlabelled data"/>
+      <connect from_op="LR" from_port="labelled data" to_port="result 2"/>
+      <connect from_op="DT" from_port="labelled data" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+    </process>
+  </operator>
+</process>

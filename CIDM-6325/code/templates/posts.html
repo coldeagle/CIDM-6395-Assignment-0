@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Posts{% endblock title %}
+
+{% block content %}
+    <div class="row pb-4">
+        <div class="col">
+            <h2 class="blog-post-title mb-1">{% if q is None%}Blog Posts{% else %}{{post_list|length}} post{% if post_list|length > 1 or post_list|length == 0 %}s were{% else %} was{% endif %} found matching the term "{{q}}" {% endif %}</h2>
+            <hr>
+            <div class="container">
+                <div class="row">
+                    {% if post_list|length == 0 %}No records were found!
+                    {% else %}
+                    <div class="col border rounded-1">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr align="center">
+                                    <th scope="col">Blog Title</th>
+                                    <th scope="col">Author</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for post in post_list %}
+                                    <tr>
+                                        <td class="text-center"><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></td>
+                                        <td class="text-center">{{ post.author }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

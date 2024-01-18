@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.title }}{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <article class="blog-post">
+                    <h1 class="blog-post-title mb-1">{{ object.title }}</h1>
+                    <hr>
+                    <p class="blog-post-meta mb-1">
+                        By {{ object.author }}<br/>
+                        <a href="{% url 'post_edit' object.pk %}">Edit Blog Post</a>&nbsp;|&nbsp;<a href="{% url 'post_delete' object.pk %}">Delete Blog Post</a>
+                    </p>
+                    <hr>
+                    <section class="row">
+                        <figure class="col-4">
+                            <img src="{{ object.get_cover_url}}" class="img-fluid bg-dark" />
+                        </figure>
+                        <div class="col-8">
+                            {{ object.body | safe}}
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

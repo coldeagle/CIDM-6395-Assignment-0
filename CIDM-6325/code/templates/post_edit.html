@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load wysiwyg %}
+
+{% block title %}Edit Post{% endblock title %}
+
+{% block content %}
+    <h2 class="blog-post-title mb-1">Edit post</h2>
+    <hr>
+        <form action="" enctype="multipart/form-data" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col">
+                {{ form | crispy }}
+
+                <textarea id="body" name="{{ object.body }}"></textarea>
+
+                {% wysiwyg_editor "body" %}
+            </div>
+            <hr class="my-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Update</button>
+        </div>
+    </form>
+{% endblock content %}

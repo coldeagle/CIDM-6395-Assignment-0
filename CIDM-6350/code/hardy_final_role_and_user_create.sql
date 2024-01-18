@@ -1,0 +1,42 @@
+CREATE ROLE IF NOT EXISTS Manager;
+GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE `CIDM_6350_FINAL`.* TO Manager;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ1_CustomersWithBalance` TO Manager;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ2_MyReadings` TO Manager;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ3_AllReadingsBillsAndPayments` TO Manager;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ4_NumReadingsByGCreighton_MayToDec2019` TO Manager;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ5_BillsByReaders` TO Manager;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ6_HighestConsumer_MayToDec_2019` TO Manager;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ7_AvgConsumption_MayToDec_2019` TO Manager;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ8_AboveAverageConsumersMayToDec2019` TO Manager;
+
+CREATE ROLE IF NOT EXISTS Reader;
+GRANT SELECT, INSERT, UPDATE ON TABLE `CIDM_6350_FINAL`.`Reading` TO Reader;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`Meter` TO Reader;
+GRANT SELECT, UPDATE ON TABLE `CIDM_6350_FINAL`.`IQ2_MyReadings` TO Reader;
+
+CREATE ROLE IF NOT EXISTS CustomerService;
+GRANT INSERT, UPDATE, SELECT ON TABLE `CIDM_6350_FINAL`.`Bill` TO CustomerService;
+GRANT INSERT, SELECT, UPDATE ON TABLE `CIDM_6350_FINAL`.`Customer` TO CustomerService;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ1_CustomersWithBalance` TO CustomerService;
+GRANT SELECT ON TABLE `CIDM_6350_FINAL`.`IQ3_AllReadingsBillsAndPayments` TO CustomerService;
+
+CREATE USER IF NOT EXISTS 'gcreighton' IDENTIFIED BY 'gcreighton';
+GRANT Reader TO gcreighton;
+CREATE USER IF NOT EXISTS 'ltschiersch' IDENTIFIED BY 'ltschiersch';
+GRANT Reader TO ltschiersch;
+CREATE USER IF NOT EXISTS 'rastill' IDENTIFIED BY 'rastill';
+GRANT Manager TO rastill;
+CREATE USER IF NOT EXISTS 'rskip' IDENTIFIED BY 'rskip';
+GRANT Reader TO rskip;
+CREATE USER IF NOT EXISTS 'lfessby' IDENTIFIED BY 'lfessby';
+GRANT CustomerService TO lfessby;
+CREATE USER IF NOT EXISTS 'bmunson' IDENTIFIED BY 'bmunson';
+GRANT Reader TO bmunson;
+CREATE USER IF NOT EXISTS 'cbuey' IDENTIFIED BY 'cbuey';
+GRANT Reader TO cbuey;
+CREATE USER IF NOT EXISTS 'wcritcher' IDENTIFIED BY 'wcritcher';
+GRANT CustomerService TO wcritcher;
+CREATE USER IF NOT EXISTS 'emadelin' IDENTIFIED BY 'emadelin';
+GRANT Reader TO emadelin;
+CREATE USER IF NOT EXISTS 'gmccaskill' IDENTIFIED BY 'gmccaskill';
+GRANT Reader TO gmccaskill;
